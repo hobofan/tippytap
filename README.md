@@ -17,15 +17,15 @@ cargo add tippytap
 ```rust
 use tippytap::prelude::*;
 
-pub fn sci_hub_tooltip(doi: &str) -> TipUrlLine {
+pub fn sci_hub_tooltip(input: &TipInput) -> TipUrlLine {
     TipUrlLine {
         label: "SciHub".to_owned(),
-        value: format!("https://sci-hub.tw/{}", doi),
+        value: format!("https://sci-hub.tw/{}", input.args[0]),
     }
 }
 
 fn main() {
-    let input = std::env::args().nth(1).expect("Missing input");
+    let input = TipInput::from_args();
 
     let output = vec![
         TipTextLine {
